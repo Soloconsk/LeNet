@@ -51,3 +51,6 @@ def C3(input, kernel, inchannel, outchannel):
                 output[i_count][j_count][index] = sum_v
                 j_count += 1  # C1中的5x5被卷积计算完毕了，可以更新到下一个卷积块了
     i_count += 1  # C1中的一行被卷积计算完毕了，可以更新到下一行了
+
+def S4():
+    pass
