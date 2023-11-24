@@ -137,3 +137,7 @@ def C3(input, kernel, inchannel, outchannel):
 
 def S4():
     pass
+
+def C5():
+    pass
+
