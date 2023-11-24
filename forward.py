@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def C1(input, kernel, inchannel, outchannel):
+def c1(input, kernel, outchannel):
     sum_v = 0  # S2中unit的值
     i_count = 0
     j_count = 0  # 被C1卷积出来的值放入S2的位置
@@ -18,23 +18,23 @@ def C1(input, kernel, inchannel, outchannel):
     return output
 
 
-def S2(input, kernel, inchannel, outchannel):
-    sum_v = 0
+def s2(input, kernel):
     i_count = 0
     j_count = 0
     output = np.zeros((14, 14, 6))
-    for i in range(0, 28, 2):
-        for j in range(0, 28, 2):
-            for kernel_i in range(i, i + 2):
-                for kernel_j in range(j, j + 2):
-                    input[kernel_i][kernel_j] = kernel[kernel_i][kernel_j]
-            output[i_count][j_count] = np.max(kernel)
-            j_count += 1
-        i_count += 1
+    for index in range(0, 6):
+        for i in range(0, 28, 2):
+            for j in range(0, 28, 2):
+                for kernel_i in range(i, i + 2):
+                    for kernel_j in range(j, j + 2):
+                        input[kernel_i][kernel_j] = kernel[kernel_i][kernel_j]
+                output[i_count][j_count] = np.max(kernel)
+                j_count += 1
+            i_count += 1
     return output
 
 
-def C3(input, kernel, inchannel, outchannel):
+def c3(input, kernel):
     sum_v = 0  # S2中unit的值
     i_count = 0
     j_count = 0  # 被S2卷积出来的值放入C3的位置
@@ -135,9 +135,39 @@ def C3(input, kernel, inchannel, outchannel):
     return output
 
 
-def S4():
+def s4(input, kernel):
+    i_count = 0
+    j_count = 0
+    output = np.zeros((5, 5, 16))
+    for index in range(0, 16):
+        for i in range(0, 10, 2):
+            for j in range(0, 10, 2):
+                for kernel_i in range(i, i + 2):
+                    for kernel_j in range(j, j + 2):
+                        input[kernel_i][kernel_j][index] = kernel[kernel_i][kernel_j][index]
+                output[i_count][j_count] = np.max(kernel)
+                j_count += 1
+            i_count += 1
+    return output
+
+
+def c5(input, kernel, inchannel, outchannel):
+    k_index = 0
+    output = np.zeros((1, 1, 120))
+    for num in range(0, outchannel):
+        sum_v = 0
+        for k in range(0, 16):
+            for i in range(0, 5):
+                for j in range(0, 5):
+                    sum_v += input[i][j][k] * kernel[i][j][k_index]
+                    k_index += 1
+        output[0][0][num] = sum_v
+        return output
+
+
+def f6():
     pass
 
-def C5():
-    pass
 
+def output():
+    pass
