@@ -1,5 +1,6 @@
 import numpy as np
-
+from PIL import Image
+from init import InitKernel_C1
 
 def c1(input, kernel, outchannel):
     sum_v = 0  # S2中unit的值
@@ -171,3 +172,10 @@ def f6():
 
 def output():
     pass
+
+weight = InitKernel_C1()
+if __name__ == '__main__':
+    img = Image.open('../0.jpg').convert('L')
+    img = np.array(img).reshape((32, 32))
+    o1 = c1(img, weight, 6)
+    print(o1)
