@@ -1,2 +1,2 @@
 # LeNet
-Using c++ to realize LeNet-5
+Using python to realize LeNet-5
