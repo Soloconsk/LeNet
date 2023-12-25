@@ -7,9 +7,9 @@ import torchvision.datasets as datasets
 from torchvision import transforms
 from torch.utils.data import DataLoader
 
-model = torch.load('lenet_maxpool.pt')
-validation_data = datasets.ImageFolder(root='test_dataset', transform=transforms.Compose([
-    transforms.Resize(28), transforms.Grayscale(), transforms.ToTensor()
+model = torch.load('lenet_myData_withoutpool.pt')
+validation_data = datasets.ImageFolder(root='test_dataset_28', transform=transforms.Compose([
+    transforms.Grayscale(), transforms.ToTensor()
 ]))
 validation_loader = DataLoader(validation_data, batch_size=1, shuffle=False)
 
@@ -26,4 +26,4 @@ for data in validation_loader:
     _, predicted = torch.max(output.data, 1)
     correct = correct + (predicted == labels).sum().item()
 
-print('50张图像的测试准确率:{}'.format(100 * correct / total))
+print('300张图像的测试准确率:{}'.format(100 * correct / total))
